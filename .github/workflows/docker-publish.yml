@@ -16,19 +16,18 @@ permissions:
   packages: write
   
 jobs:
-  - name: Extract metadata for Docker
-    id: meta
-    uses: docker/metadata-action@v5
-    with:
-      images: ghcr.io/pbaletkeman/skills-publish-docker-images/stackoverflown
-
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/pbaletkeman/skills-publish-docker-images/stackoverflown
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
-
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
